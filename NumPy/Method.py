@@ -229,3 +229,105 @@ print(c)
 a = np.array([1,2,3]).reshape(-1, 1)
 b = np.array([4,5,6]).reshape(-1,1)
 print(np.vstack((a,b)))
+
+
+# 1次元配列に変換 元の配列は変換せずにコピーを返す
+a = np.arange(12).reshape(3,4)
+b = a.flatten()
+print(b)
+
+# 高速で1次元配列に変換
+a = np.arange(12).reshape(3,4)
+print(a.ravel())
+
+# 行方向に読み取る
+print(a.ravel(order='F'))
+
+
+
+# frombuffer bytesからndarrayへ高速に変換
+# frombuffer(buffer, dtype=float, count=-1, offset=0)
+#  buffer...バッファとして読み込むオブジェクト
+#  dtype...データ型
+#  count...データを読み込む数(-1はすべて)
+#  offset...バイト単位で読み込み開始する位置を指定
+
+src = bytes([1,2,3,4,5])
+a = np.frombuffer(src, dtype=np.int8)
+print(a)
+
+
+# 要素が0以外のインデックスを取得
+a = np.random.randint(0,5,size=10)
+print(a)
+print(np.nonzero(a))
+
+# whereでも同様のことが可能
+print(np.where(a != 0))
+
+
+# diff  差分を取る
+# diff(a, n=1, axis=-1)
+#  a...差分を取りたい配列
+#  n...差を取りたい微分の階数(差分法)
+#  axis...どの軸に差分をとるか
+
+a = np.random.randint(-5,10,size=10)
+print(a)
+print(np.diff(a, n=1))
+print(np.diff(a, n=2))
+
+a = np.random.randint(-5,10,size=(3,4))
+print(np.diff(a, axis=0))
+
+# cumsum 足し合わせる
+# cumsum(a, axis=None, dtype=None, out=None)
+#  a...足し合わせを取りたい配列
+#  axis...どの軸に要素を足し合わせるか
+#  dtype...返される配列のデータ型
+#  out...計算結果の格納先
+
+a = np.random.randint(10, size=10)
+print(a)
+print(np.cumsum(a))
+
+a = np.random.randint(10, size=(3,4))
+print(a)
+# 列方向に足す
+print(np.cumsum(a, axis=1))
+
+
+# 配列同士の結合
+
+a = np.array([1,2,3])
+b = np.array([4,5,6])
+print(np.r_[a,b])
+
+# 多次元配列は、axis方向に要素を合わせる
+a = np.zeros((1,3))
+b = np.ones((2,3))
+print(np.r_[a,b])
+
+# スライス表記
+print(np.r_[:10])
+# 0～9を2刻みで表示
+print(np.r_[0:10:2])
+# 逆順
+print(np.r_[10:0:-1])
+# 10等分
+print(np.r_[0:9:10j])
+
+# 最後に配列を追加
+print(np.r_[0:3, 4, 5])
+
+# 行列
+a = np.array([1,2,3])
+b = np.array([4,5,6])
+print(np.r_['r', a, b])
+#縦ベクトルにする
+print(np.r_['c', a, b])
+
+a = np.zeros((2,3))
+b = np.ones((2,2))
+
+print(np.c_[a,b])

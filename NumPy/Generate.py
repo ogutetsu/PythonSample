@@ -51,5 +51,24 @@ print(np.eye(3,4,1))
 print(np.identity(3))
 
 
+# tile 配列をタイル上に並べる
+# tile(A, reps)
+#  A...並べたい配列
+#  reps...どの軸方向に何回繰り返すかを指定
+
+a = np.arange(3)
+print(np.tile(a, 2))
+
+print(np.tile(a, (3,1)))
+
+a = np.arange(6).reshape(2,3)
+print(np.tile(a, 2))
+
+
+# newaxis 配列に新しく次元を追加する
+a = np.arange(12).reshape(3,4)
+print(a[np.newaxis, :, :])
+
+print(a[:, np.newaxis, :])
 
 
